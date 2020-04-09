@@ -6,7 +6,7 @@
 npm install
 ```
 
-### Runningf
+### Running
 
 ```
 npm run dev
