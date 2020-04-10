@@ -1,13 +1,23 @@
 const express = require('express')
+const fs = require('fs')
 const path = require('path')
 
 const app = express()
 
 app.use('/', express.static('public'))
-app.use('/project', express.static('project'))
+app.use('/projects', express.static('projects'))
+// app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../public', 'index.html')))
 
-app.get('/project', (req, res) => res.sendFile(path.join(__dirname, '../project', 'index.html')))
-app.use('*', (req, res) => res.sendFile(path.join(__dirname, '../public', 'index.html')))
+app.use('/img', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public', 'index.html'))
+
+  fs.readdir('public/img', (err, files) => {
+    files.forEach((file) => {
+      res.write(`<img src='${file}' alt="" height="42" width="42">`)
+    })
+    res.end()
+  })
+})
 
 const PORT = 5000
 app.listen(PORT, () => console.log(`Listening at http://localhost:${PORT}`))
