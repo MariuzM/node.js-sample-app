@@ -7,7 +7,9 @@ const app = express()
 app.use('/', express.static('public'))
 app.use('/projects', express.static('projects'))
 
-app.use('/', (req, res) => {
+// app.use('*', (req, res) => res.sendFile(path.join(__dirname, '../public', 'index.html')))
+
+app.use('/img', (req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/html' })
 
   fs.readdir('public/img', (err, files) => {
@@ -16,10 +18,7 @@ app.use('/', (req, res) => {
     })
     res.end()
   })
-  express.static('public')
 })
-
-// app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../public', 'index.html')))
 
 const PORT = 5000
 app.listen(PORT, () => console.log(`Listening at http://localhost:${PORT}`))
