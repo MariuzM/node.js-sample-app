@@ -10,9 +10,9 @@ app.use('/projects', express.static('projects'))
 app.use('/img', (req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/html' })
 
-  fs.readdir('public/img', (err, files) => {
+  fs.readdir('projects/img', (err, files) => {
     files.forEach((file) => {
-      res.write(`<img src='${file}' alt="" height="42" width="42">`)
+      res.write(`<img src='projects/img/${file}' alt="" height="42" width="42">`)
     })
     res.end()
   })
